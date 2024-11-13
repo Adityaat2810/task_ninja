@@ -23,6 +23,8 @@ model Zap {
   trigger Trigger?  // every zap has one trigger 
   user  User @relation(fields: [userId], references: [id])
   actions Action[]
+
+  zapRuns ZapRun[]
 }
 
 model Trigger {
@@ -54,4 +56,10 @@ model AvailableTrigger {
   name String 
   image String
   triggers Trigger[]
+}
+
+model ZapRun{
+  id String @id @default(uuid())
+  zapId String
+  zap Zap @relation(fields: [zapId],references: [id])
 }
